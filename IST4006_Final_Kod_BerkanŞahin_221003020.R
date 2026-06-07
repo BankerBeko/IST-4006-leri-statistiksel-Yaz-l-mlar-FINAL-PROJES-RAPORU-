@@ -32,8 +32,9 @@ registerDoParallel(cl)
 
 # --- 1.1 Verinin Okunması ve Temel Yapının İncelenmesi ----------------------
 
-drive_link <- "https://drive.google.com/file/d/1Y-qxOc_-58dNj3JooDxaIqtjP7H6DZE5/view?usp=sharing"
-flights <- read_csv(drive_link)
+dropbox_link <- "https://www.dropbox.com/scl/fi/wk5uojf24s0wj2fvzyhls/2018.csv?rlkey=x5vegijfmcsrgj7vegi0pymvy&dl=1"
+flights <- read_csv(dropbox_link)
+
 # Kalkış gecikmesi 1 dakika ve üzeri olan gözlemler alınıyor
 flightsnozero <- subset(flights, DEP_DELAY >= 1)
 
