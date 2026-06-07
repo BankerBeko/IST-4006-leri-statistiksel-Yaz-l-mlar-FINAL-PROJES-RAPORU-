@@ -7,13 +7,17 @@
 # çok yüksek kardinaliteye sahip olduğundan ve çalışmanın odak noktası gecikme süreleri 
 # olduğundan modelleme sürecine dahil edilmemiştir. One-hot encoding yöntemi bu yüzden
 # kodlar arasında yoktur.
+# =============================================================================
+# Scaling işlemi sadece modelleme için uygulanmıştır.
+# Train-test ayrımı sonrasında yapılmıştır.
+# =============================================================================
 # ─────────────────────────────────────────────────────────────────────────────
 # PAKET KURULUMU VE YÜKLEMESİ
 # ─────────────────────────────────────────────────────────────────────────────
 
 paketler <- c("corrplot", "ggplot2", "car", "rpart", "rpart.plot", "gridExtra",
               "caret", "e1071", "randomForest", "gbm", "glmnet",
-              "MASS", "nnet", "doParallel", "dplyr", "reshape2","readr")
+              "MASS", "nnet", "doParallel", "dplyr", "reshape2","readr","curl")
 
 for (p in paketler) {
   if (!require(p, character.only = TRUE)) {
@@ -386,11 +390,11 @@ ggplot(test_performans, aes(x = reorder(Model, RMSE), y = RMSE, fill = RMSE)) +
 
 en_iyi_model <- model_nnet
 
-cat("\n========== DEĞİŞKEN ÖNEM DÜZEYLERİ (Random Forest) ==========\n")
+cat("\n========== DEĞİŞKEN ÖNEM DÜZEYLERİ ==========\n")
 varimportance <- varImp(en_iyi_model, scale = TRUE)
 print(varimportance)
 plot(varimportance,
-     main = "Değişken Önem Düzeyleri (Random Forest)",
+     main = "Değişken Önem Düzeyleri",
      col  = "steelblue")
 
 # --- 4.4 İndirgenmiş (Final) Model ------------------------------------------
